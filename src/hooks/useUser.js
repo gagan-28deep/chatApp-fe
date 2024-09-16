@@ -19,7 +19,6 @@ import { logout } from "../service/user/logout";
 
 const useUser = () => {
   const accessToken = useSelector((state) => state?.user);
-  console.log("accessToken", accessToken);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
