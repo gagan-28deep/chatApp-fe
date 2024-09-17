@@ -1,13 +1,23 @@
+import { useSelector } from "react-redux";
 import { DUMMY_MESSAGES } from "../../dummy_data/dummy";
 import Message from "./Message";
-
+import { useEffect } from "react";
+import useMessages from "../../hooks/useMessages";
 const Messages = () => {
-	return (
-		<div className='px-4 flex-1 overflow-auto'>
-			{DUMMY_MESSAGES.map((message) => (
-				<Message key={message.id} message={message} />
-			))}
-		</div>
-	);
+  const { getConversationMessages } = useMessages();
+  useEffect(() => {
+    const initial = async () => {
+      await getConversationMessages();
+    };
+    initial();
+  }, []);
+  const messages = useSelector((state) => state?.messages?.messages);
+  return (
+    <div className="px-4 flex-1 overflow-auto">
+      {messages?.map((message) => (
+        <Message key={message.id} message={message} />
+      ))}
+    </div>
+  );
 };
 export default Messages;

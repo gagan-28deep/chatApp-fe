@@ -38,7 +38,7 @@ const useUser = () => {
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
+      showToast(error?.response?.data?.message, "error");
     }
   };
 
@@ -61,7 +61,7 @@ const useUser = () => {
         navigate("/login");
       }
     } catch (error) {
-      console.log(error);
+      showToast(error?.response?.data?.message, "error");
     }
   };
 

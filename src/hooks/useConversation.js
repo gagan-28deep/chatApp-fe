@@ -34,7 +34,7 @@ const useConversation = () => {
         dispatch(setConversationsLoading(false));
       }
     } catch (error) {
-      console.log("error", error);
+      dispatch(setConversationsError(error));
     }
   };
 
