@@ -6,6 +6,7 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import { getMessages } from "../service/messages/getMessages";
+import { sendMessage } from "../service/messages/sendMessage";
 
 const useMessages = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,26 @@ const useMessages = () => {
     }
   };
 
-  return { getConversationMessages };
+  // Send the message
+  const sendConversationMessage = async (data) => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${accessToken}`,
+      };
+      const response = await sendMessage(
+        selectedConversation?.id,
+        data,
+        headers
+      );
+      if (response?.status === 200) {
+        await getConversationMessages();
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  return { getConversationMessages, sendConversationMessage };
 };
 
 export default useMessages;
