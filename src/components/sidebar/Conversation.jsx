@@ -16,7 +16,7 @@ const Conversation = ({ conversation, emojis }) => {
       >
         <div className="avatar online">
           <div className="w-8 md:w-12 rounded-full">
-            <img src={conversation.profilePic} alt="user avatar" />
+            <img src={conversation?.profilePic} alt="user avatar" />
           </div>
         </div>
 
