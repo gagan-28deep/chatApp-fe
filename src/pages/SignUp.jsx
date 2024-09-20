@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import GenderCheckbox from "../components/GenderCheckbox";
 import { useForm } from "react-hook-form";
+import useUser from "../hooks/useUser";
 
 const SignUp = () => {
+  const {handleSignUp} = useUser()
   const {
     register,
     handleSubmit,
@@ -10,9 +11,8 @@ const SignUp = () => {
     watch,
   } = useForm();
 
-  const formData = useForm();
   const userSignUp = (data) => {
-    console.log(data);
+    handleSignUp(data);
   };
 
   return (
@@ -27,7 +27,6 @@ const SignUp = () => {
             <label className="label p-2">
               <span className="text-base label-text text-white">Full Name</span>
             </label>
-            {/* <input type='text' placeholder='John Doe' className='w-full input input-bordered  h-10' /> */}
             <input
               {...register("fullName", { required: true })}
               type="text"
@@ -43,11 +42,6 @@ const SignUp = () => {
             <label className="label p-2 ">
               <span className="text-base label-text text-white">Username</span>
             </label>
-            {/* <input
-              type="text"
-              placeholder="johndoe"
-              className="w-full input input-bordered h-10"
-            /> */}
             <input
               {...register("username", { required: true })}
               type="text"
@@ -63,11 +57,6 @@ const SignUp = () => {
             <label className="label p-2 ">
               <span className="text-base label-text text-white">Email</span>
             </label>
-            {/* <input
-              type="text"
-              placeholder="johndoe"
-              className="w-full input input-bordered h-10"
-            /> */}
             <input
               {...register("email", { required: true })}
               type="text"
@@ -83,11 +72,6 @@ const SignUp = () => {
             <label className="label">
               <span className="text-base label-text text-white">Password</span>
             </label>
-            {/* <input
-              type="password"
-              placeholder="Enter Password"
-              className="w-full input input-bordered h-10"
-            /> */}
             <input
               {...register("password", {
                 required: true,
@@ -114,11 +98,6 @@ const SignUp = () => {
                 Confirm Password
               </span>
             </label>
-            {/* <input
-              type="password"
-              placeholder="Confirm Password"
-              className="w-full input input-bordered h-10"
-            /> */}
             <input
               {...register("confirmPassword", {
                 required: true,
@@ -138,7 +117,38 @@ const SignUp = () => {
             )}
           </div>
 
-          <GenderCheckbox />
+          <div>
+            <label className="label p-2">
+              <span className="text-base label-text text-white">Gender</span>
+            </label>
+            <div className="flex">
+              <div className="form-control">
+                <label className="label gap-2 cursor-pointer">
+                  <span className="label-text text-white">Male</span>
+                  <input
+                    {...register("gender", { required: true })}
+                    type="radio"
+                    value="male"
+                    className="radio border-slate-900"
+                  />
+                </label>
+              </div>
+              <div className="form-control">
+                <label className="label gap-2 cursor-pointer">
+                  <span className="label-text text-white">Female</span>
+                  <input
+                    {...register("gender", { required: true })}
+                    type="radio"
+                    value="female"
+                    className="radio border-slate-900"
+                  />
+                </label>
+              </div>
+            </div>
+            {errors.gender && (
+              <span className="text-red-500">Gender selection is required</span>
+            )}
+          </div>
 
           <Link
             to={"/login"}

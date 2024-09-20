@@ -17,10 +17,33 @@ import { showToast } from "../utils/showToast";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../service/user/logout";
 
+import {signup} from "../service/user/signup"
+
 const useUser = () => {
   const accessToken = useSelector((state) => state?.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // User SignUp
+
+  const handleSignUp = async (data)=>{
+    try {
+      dispatch(setUserLoading());
+      const response = await signup(data);
+      if (response.status === 200) {
+        dispatch(setUser(response.data.data));
+        dispatch(setAccessToken(response.data.data.accessToken));
+        dispatch(setRefreshToken(response.data.data.refreshToken));
+        setStorage("accessToken", response.data.data.accessToken);
+        setStorage("refreshToken", response.data.data.refreshToken);
+        setStorage("user", response.data.data);
+        showToast(response.data.message, "success");
+        navigate("/");
+      }
+    } catch (error) {
+      showToast(error?.response?.data?.message, "error");
+    }
+  }
 
   // User signin
   const handleSignIn = async (data) => {
@@ -68,6 +91,7 @@ const useUser = () => {
   return {
     handleSignIn,
     handleLogout,
+    handleSignUp
   };
 };
 export default useUser;
