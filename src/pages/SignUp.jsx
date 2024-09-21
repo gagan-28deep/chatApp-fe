@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useUser from "../hooks/useUser";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
+  const userLoading = useSelector((state) => state.user.userLoading);
   const {handleSignUp} = useUser()
   const {
     register,
@@ -157,8 +159,13 @@ const SignUp = () => {
             Already have an account?
           </Link>
 
+          {userLoading && (
+            <div className="loading loading-spinner mx-auto"></div>
+          )}
+
           <div>
             <button
+              disabled={userLoading}
               type="submit"
               className="btn btn-block btn-sm mt-2 border border-slate-700"
             >

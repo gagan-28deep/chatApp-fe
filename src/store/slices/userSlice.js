@@ -27,6 +27,13 @@ const userSlice = createSlice({
     setRefreshToken: (state, action) => {
       state.refreshToken = action.payload;
     },
+    setInitialState : (state) => {
+      state.user = null;
+      state.userLoading = false;
+      state.userError = null;
+      state.accessToken = null;
+      state.refreshToken = null;
+    },
   },
 });
 
@@ -36,5 +43,6 @@ export const {
   setUserError,
   setAccessToken,
   setRefreshToken,
+  setInitialState
 } = userSlice.actions;
 export default userSlice.reducer;

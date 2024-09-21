@@ -4,6 +4,7 @@ import {
   setUserError,
   setAccessToken,
   setRefreshToken,
+  setInitialState,
 } from "../store/slices/userSlice";
 import {
   setStorage,
@@ -80,6 +81,7 @@ const useUser = () => {
         removeStorage("accessToken");
         removeStorage("refreshToken");
         removeStorage("user");
+        dispatch(setInitialState());
         showToast(response.data.message, "success");
         navigate("/login");
       }
