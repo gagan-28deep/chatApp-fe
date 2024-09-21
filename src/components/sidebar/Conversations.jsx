@@ -8,6 +8,9 @@ const Conversations = () => {
   const conversationsData = useSelector(
     (state) => state?.conversation?.conversations
   );
+  const conversationLoading = useSelector(
+    (state) => state?.conversation?.conversationsLoading
+  )
   const { getConversations } = useConversation();
 
   useEffect(() => {
@@ -16,6 +19,10 @@ const Conversations = () => {
     };
     initial();
   }, []);
+
+  if (conversationLoading) {
+    return <p className="loading loading-spinner mx-auto"></p>;
+  }
   return (
     <div className="py-2 flex flex-col overflow-auto">
       {conversationsData?.length > 0 &&

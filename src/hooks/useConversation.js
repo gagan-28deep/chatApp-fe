@@ -31,7 +31,6 @@ const useConversation = () => {
       if (response?.status === 200) {
         dispatch(setConversations(response.data.data));
         dispatch(setConversationsError(null));
-        dispatch(setConversationsLoading(false));
       }
     } catch (error) {
       dispatch(setConversationsError(error));

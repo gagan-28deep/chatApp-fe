@@ -27,6 +27,7 @@ const conversationSlice = createSlice({
     },
     setConversations: (state, action) => {
       state.conversations = action.payload;
+      state.conversationsLoading = false;
     },
     setConversationsError: (state, action) => {
       state.conversationsError = action.payload;
