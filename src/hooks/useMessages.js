@@ -29,6 +29,7 @@ const useMessages = () => {
       }
     } catch (error) {
       dispatch(setMessagesError(error));
+      dispatch(setMessages([]));
     }
   };
 
