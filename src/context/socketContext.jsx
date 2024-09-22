@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const socketUrl =
   import.meta.env.MODE === String("development")
     ? "http://localhost:8000"
-    : "https://chatappserver.onrender.com";
+    : "https://chatapp-be-ecnt.onrender.com/";
 
 const SocketContext = createContext();
 
