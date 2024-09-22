@@ -1,13 +1,23 @@
 import { useSelector } from "react-redux";
 import useConversation from "../../hooks/useConversation";
 import { useSocketContext } from "../../context/socketContext";
+import useSocket from "../../hooks/useSocket";
+import { useEffect } from "react";
 const Conversation = ({ conversation, emojis }) => {
+  const {onlineUsers , socket , handleGetSocket} = useSocket();
+  useEffect(() => {
+    const initial = async () => {
+      await handleGetSocket();
+    }
+    initial();
+  } , []);
   const { setConversation } = useConversation();
   const selectedConversation = useSelector(
     (state) => state?.conversation?.selectedConversation
   );
   const isSelected = selectedConversation?.id === conversation.id;
-  const { onlineUsers } = useSocketContext();
+  // const onlineUsers = useSelector((state) => state?.socket?.onlineUsers);
+  // console.log("onlineUsers" , onlineUsers);
   const isOnline = onlineUsers?.includes(conversation?.id);
   return (
     <>

@@ -13,9 +13,9 @@ createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <BrowserRouter>
         <ToastContainer />
-        <SocketContextProvider>
-          <App />
-        </SocketContextProvider>
+        {/* <SocketContextProvider> */}
+        <App />
+        {/* </SocketContextProvider> */}
       </BrowserRouter>
     </Provider>
   </StrictMode>
