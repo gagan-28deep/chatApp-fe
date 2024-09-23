@@ -4,6 +4,7 @@ import Message from "./Message";
 import { useEffect } from "react";
 import useMessages from "../../hooks/useMessages";
 import MessageSkeleton from "../skeletons/MessageSkeleton.jsx";
+import useListenMessages from "../../hooks/useListenMessages.js";
 const Messages = () => {
   const selectedConversation = useSelector(
     (state) => state?.conversation?.selectedConversation
@@ -11,14 +12,22 @@ const Messages = () => {
   const messagesLoading = useSelector(
     (state) => state?.messages?.messagesLoading
   );
+  const messages = useSelector((state) => state?.messages?.messages);
   const { getConversationMessages } = useMessages();
+  const { setNewMessage } = useListenMessages();
   useEffect(() => {
     const initial = async () => {
       await getConversationMessages();
     };
     initial();
   }, [selectedConversation?.id]);
-  const messages = useSelector((state) => state?.messages?.messages);
+
+  useEffect(() => {
+    const initial = async () => {
+      await setNewMessage();
+    };
+    initial();
+  },[])
   if (messagesLoading) {
     return (
       <div className="px-4 flex-1 overflow-auto">
