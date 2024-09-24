@@ -12,14 +12,16 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUserLoading: (state) => {
-      state.userLoading = true;
+    setUserLoading: (state , action) => {
+      state.userLoading = action.payload;
     },
     setUser: (state, action) => {
       state.user = action.payload;
+      state.userLoading = false;
     },
     setUserError: (state, action) => {
       state.userError = action.payload;
+      state.userLoading = false;
     },
     setAccessToken: (state, action) => {
       state.accessToken = action.payload;

@@ -49,9 +49,10 @@ const useUser = () => {
   // User signin
   const handleSignIn = async (data) => {
     try {
-      dispatch(setUserLoading());
+      dispatch(setUserLoading(true));
       const response = await signin(data);
       if (response.status === 200) {
+        dispatch(setUserLoading(false));
         dispatch(setUser(response.data.data));
         dispatch(setAccessToken(response.data.data.accessToken));
         dispatch(setRefreshToken(response.data.data.refreshToken));
@@ -62,6 +63,7 @@ const useUser = () => {
         navigate("/");
       }
     } catch (error) {
+      dispatch(setUserLoading(false));
       showToast(error?.response?.data?.message, "error");
     }
   };

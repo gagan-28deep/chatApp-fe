@@ -4,13 +4,15 @@ import Messages from "./Messages";
 import { MessageCircle } from "lucide-react";
 
 // import { MessageCircle } from "lucide-react";
-
+import useChatScroll from "../../hooks/useChatScroll.js"
 const MessageContainer = () => {
+  const messages = useSelector((state) => state?.messages?.messages);
+  const ref = useChatScroll(messages)
   const selectedConversation = useSelector(
     (state) => state?.conversation?.selectedConversation
   );
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col overflow-y-auto" ref={ref}>
       {selectedConversation ? (
         <div className="w-full flex flex-col">
           <>
