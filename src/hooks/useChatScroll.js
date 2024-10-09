@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 
+// Function to scroll to bottom of chat
 function useChatScroll(dep) {
 	const ref = useRef();
     console.log("ref", ref?.current?.scrollHeight);
